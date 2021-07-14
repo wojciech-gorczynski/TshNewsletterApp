@@ -1,9 +1,14 @@
 package Pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MainPage {
+public class MainPage extends SeleniumBasePage{
+
+    public MainPage(WebDriver driver){
+        super(driver);
+    }
 
     @FindBy(id = "newsletter_email")
     private WebElement fldEmail;
@@ -29,7 +34,7 @@ public class MainPage {
     @FindBy(id = "#newsletter_agreement")
     private WebElement chkNewsletterAgreement;
 
-    
+
 
 
 
