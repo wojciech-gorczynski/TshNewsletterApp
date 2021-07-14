@@ -1,10 +1,11 @@
-package Pages;
+package pages;
 
+import base.SeleniumBasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MainPage extends SeleniumBasePage{
+public class MainPage extends SeleniumBasePage {
 
     public MainPage(WebDriver driver){
         super(driver);
@@ -19,8 +20,8 @@ public class MainPage extends SeleniumBasePage{
     @FindBy(id = "newsletter_surname")
     private WebElement fldSurname;
 
-    @FindBy(id = "newsletter_newsType")
-    private WebElement cboNewsletterType;
+    @FindBy(css = "div[class*='ant-select-dropdown']")
+    private WebElement dpdNewsletterType;
 
     @FindBy(css = "div[class='ant-calendar-input-wrap']")
     private WebElement dtpStartingDate;
@@ -31,8 +32,11 @@ public class MainPage extends SeleniumBasePage{
     @FindBy(id = "newsletter_Sex")
     private WebElement rdoSex;
 
-    @FindBy(id = "#newsletter_agreement")
+    @FindBy(id = "newsletter_agreement")
     private WebElement chkNewsletterAgreement;
+
+    @FindBy(css = "button[type=submit]")
+    private WebElement btnSubmit;
 
 
 
