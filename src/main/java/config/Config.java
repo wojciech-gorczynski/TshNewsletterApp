@@ -26,4 +26,16 @@ public class Config {
     }
 
     public String getChromedriverPath () { return properties.getProperty("chromedriver.path");}
+
+    public String getGeckodriverPath () { return properties.getProperty("geckodriver.path");}
+
+    public String getEdgedriverPath () { return properties.getProperty("edgedriver.path");}
+
+    public String getChromedriverPropertyName () { return properties.getProperty("chromedriver.propertyName");}
+
+    public String getGeckodriverPropertyName () { return properties.getProperty("geckodriver.propertyName");}
+
+    public String getEdgedriverPropertyName () { return properties.getProperty("edgedriver.propertyName");}
+
+
 }

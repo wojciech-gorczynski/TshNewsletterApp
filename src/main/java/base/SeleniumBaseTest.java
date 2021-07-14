@@ -13,11 +13,14 @@ public class SeleniumBaseTest {
     @BeforeMethod
     public void baseBeforeMethod(){
         config = new Config();
-        System.setProperty("webdriver.chrome.driver", config.getChromedriverPath());
+        System.setProperty(config.getChromedriverPropertyName(), config.getChromedriverPath());
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.navigate().to(config.getApplicationUrl());
+        driver.manage().deleteAllCookies();
     }
+
+
 
     @AfterMethod
     public void baseAfterMethod(){

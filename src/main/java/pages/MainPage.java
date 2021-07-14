@@ -1,14 +1,19 @@
 package pages;
 
 import base.SeleniumBasePage;
+import helpers.GlobalMethods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.reporters.jq.Main;
 
 public class MainPage extends SeleniumBasePage {
 
+    GlobalMethods globalMethods;
+
     public MainPage(WebDriver driver){
         super(driver);
+        globalMethods = new GlobalMethods(driver);
     }
 
     @FindBy(id = "newsletter_email")
@@ -39,7 +44,10 @@ public class MainPage extends SeleniumBasePage {
     private WebElement btnSubmit;
 
 
-
+    public MainPage initialTest(){
+        globalMethods.setInput(fldEmail, "first test");
+        return this;
+    }
 
 
 
