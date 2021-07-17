@@ -25,11 +25,11 @@ public class Config {
         return properties.getProperty("application.url");
     }
 
-    public String getChromedriverPath () { return properties.getProperty("chromedriver.path");}
+    public String getChromedriverPath () { return properties.getProperty("chromedriver.propertyPath");}
 
-    public String getGeckodriverPath () { return properties.getProperty("geckodriver.path");}
+    public String getGeckodriverPath () { return properties.getProperty("geckodriver.propertyPath");}
 
-    public String getEdgedriverPath () { return properties.getProperty("edgedriver.path");}
+    public String getEdgedriverPath () { return properties.getProperty("edgedriver.propertyPath");}
 
     public String getChromedriverPropertyName () { return properties.getProperty("chromedriver.propertyName");}
 
