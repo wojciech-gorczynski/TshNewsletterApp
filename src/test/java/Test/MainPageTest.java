@@ -84,4 +84,12 @@ public class MainPageTest extends SeleniumBaseTest {
         Assert.assertEquals(mainPage.getSexRadiobuttonValue(), rdoChoice, "radio not selected");
     }
 
+    @Test
+    public void VerifyIfCheckboxIsSelected(){
+        mainPage.clickCheckbox();
+        Assert.assertTrue(mainPage.getCheckboxState());
+    }
+
+
+
 }

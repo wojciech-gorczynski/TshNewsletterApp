@@ -107,4 +107,12 @@ public class MainPage extends SeleniumBasePage {
         return globalMethods.getOptionFromRadiobutton(rdoSex);
     }
 
+    public void clickCheckbox(){
+        globalMethods.setCheckboxElement(chkNewsletterAgreement);
+    }
+
+    public boolean getCheckboxState(){
+       return globalMethods.getChechboxElementState(chkNewsletterAgreement);
+    }
+
 }
