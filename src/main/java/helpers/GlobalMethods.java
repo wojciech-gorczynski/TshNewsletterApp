@@ -27,20 +27,10 @@ public class GlobalMethods extends SeleniumBasePage {
 
     public void setRadioButton(WebElement radioButtonElement, String text){
         wait.until(visibilityOf(radioButtonElement));
-      //  boolean isOptionAvailable = false;
 
-        //List<WebElement> elements = radioButtonElement.findElements(By.cssSelector("input[class='ant-radio-input'][value="+ text +"]"));
         WebElement element = radioButtonElement.findElement(By.cssSelector("input[class='ant-radio-input'][value="+ text +"]"));
         element.click();
-//        for(WebElement elem : elements){
-//            if(elem.getAttribute("value").equals(text)){
-//                elem.click();
-//                isOptionAvailable = true;
-//            }
-//        }
-//        if(!isOptionAvailable) {
-//            throw new NoSuchElementException("No such radiobutton option available");
-//        }
+//
     }
 
     public void setDropdown(WebElement dpdElement, String text){
