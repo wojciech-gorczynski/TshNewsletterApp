@@ -9,9 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.reporters.jq.Main;
-
-import java.security.Key;
 
 public class MainPage extends SeleniumBasePage {
 
@@ -34,10 +31,10 @@ public class MainPage extends SeleniumBasePage {
     @FindBy(css = "ul[class*='ant-select-dropdown-menu']")
     private WebElement dpdNewsletterType;
 
-    @FindBy(css = "div[class='ant-calendar-input-wrap']")
+    @FindBy(id = "newsletter_startDate")
     private WebElement dtpStartingDate;
 
-    @FindBy(id = "#newsletter_endDate")
+    @FindBy(id = "newsletter_endDate")
     private WebElement dtpEndingDate;
 
     @FindBy(id = "newsletter_Sex")
@@ -50,22 +47,12 @@ public class MainPage extends SeleniumBasePage {
     private WebElement btnSubmit;
 
 
-    public MainPage checkSetDropdown(){
-        WebElement elem = driver.findElement(By.id("newsletter_newsType"));
-        Actions builder = new Actions(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(elem));
-        builder.sendKeys(elem,Keys.DOWN).build().perform();
-        globalMethods.setDropdown(dpdNewsletterType, "Medical");
-
-        return this;
-    }
-
     public void setInputForEmailField(String txt){
         globalMethods.setInput(fldEmail,txt);
     }
 
-    public String getInputFromEmailField(String txt){
-        return globalMethods.getTextFromElement(fldEmail);
+    public String getInputFromEmailField(){
+        return globalMethods.getTextFromInputElement(fldEmail);
     }
 
     public void setInputForNameField(String txt){
@@ -73,8 +60,8 @@ public class MainPage extends SeleniumBasePage {
 
     }
 
-    public String getInputFromNameField(String txt){
-        return globalMethods.getTextFromElement(fldFirstName);
+    public String getInputFromNameField(){
+        return globalMethods.getTextFromInputElement(fldFirstName);
     }
 
     public void setInputForSurnameField(String txt){
@@ -82,13 +69,42 @@ public class MainPage extends SeleniumBasePage {
 
     }
 
-    public String getInputFromSurnameField(String txt){
-        return globalMethods.getTextFromElement(fldSurname);
+    public String getInputFromSurnameField(){
+        return globalMethods.getTextFromInputElement(fldSurname);
 
     }
 
-    public void setInputForNewsletterType(String txt){
+    public MainPage setInputForNewsletterType(String txt){
         globalMethods.setDropdown(dpdNewsletterType,txt);
+        return this;
+    }
+
+    public String getOptionFromNewsletterDropdown(){
+        return globalMethods.getTextFromDropdown(dpdNewsletterType);
+    }
+
+    public void setCalendarStartingDate(String date){
+        globalMethods.setCalendarDate(dtpStartingDate,date);
+    }
+
+    public String getCalendarStartingDate(){
+        return globalMethods.getDateFromCalendar(dtpStartingDate);
+    }
+
+    public void setCalendarEndDate(String date){
+        globalMethods.setCalendarDate(dtpEndingDate,date);
+    }
+
+    public String getCalendarEndingDate(){
+        return globalMethods.getDateFromCalendar(dtpEndingDate);
+    }
+
+    public void setSexRadiobutton(String choice){
+        globalMethods.setRadioButton(rdoSex, choice);
+    }
+
+    public String getSexRadiobuttonValue(){
+        return globalMethods.getOptionFromRadiobutton(rdoSex);
     }
 
 }

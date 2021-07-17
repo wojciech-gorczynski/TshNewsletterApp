@@ -1,11 +1,8 @@
 package helpers;
-
 import base.SeleniumBasePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
@@ -23,7 +20,7 @@ public class GlobalMethods extends SeleniumBasePage {
         inputElement.sendKeys(text);
     }
 
-    public String getTextFromElement(WebElement element){
+    public String getTextFromInputElement(WebElement element){
         wait.until(visibilityOf(element));
         return element.getAttribute("value");
     }
@@ -45,8 +42,13 @@ public class GlobalMethods extends SeleniumBasePage {
     }
 
     public void setDropdown(WebElement dpdElement, String text){
-        wait.until(visibilityOf(dpdElement));
         boolean isAvailable = false;
+        WebElement elemDD = driver.findElement(By.id("newsletter_newsType"));
+
+        wait.until(ExpectedConditions.elementToBeClickable(elemDD));
+        Actions builder = new Actions(driver);
+        builder.sendKeys(elemDD, Keys.DOWN).build().perform();
+
         List<WebElement> elements = dpdElement.findElements(By.cssSelector("li[role='option']"));
         for(WebElement elem : elements){
             if(elem.getText().equals(text)){
@@ -62,9 +64,27 @@ public class GlobalMethods extends SeleniumBasePage {
 
     public void setCalendarDate(WebElement dtpElement, String date){
         wait.until(visibilityOf(dtpElement));
-        dtpElement.clear();
-        dtpElement.sendKeys(date);
+        dtpElement.click();
+        WebElement elem = driver.findElement(By.cssSelector("input.ant-calendar-input"));
+        wait.until(visibilityOf(elem));
+        elem.clear();
+        elem.sendKeys(date);
+        Actions builder = new Actions(driver);
+        builder.sendKeys(dtpElement, date).sendKeys(Keys.ENTER).build().perform();
     }
 
+    public String getDateFromCalendar(WebElement dtpElement){
+        WebElement elem = dtpElement.findElement(By.cssSelector(".ant-calendar-picker-input"));
+        return elem.getAttribute("value");
+    }
 
+    public String getTextFromDropdown(WebElement dpdElement){
+        WebElement element = dpdElement.findElement(By.cssSelector("li[role='option'][aria-selected='true']"));
+        return element.getText();
+    }
+
+    public String getOptionFromRadiobutton(WebElement elem) {
+        WebElement element = elem.findElement(By.cssSelector("span[class*='ant-radio-checked']>input"));
+        return element.getAttribute("value");
+    }
 }
