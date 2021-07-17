@@ -25,32 +25,46 @@ public class GlobalMethods extends SeleniumBasePage {
 
     public String getTextFromElement(WebElement element){
         wait.until(visibilityOf(element));
-        return element.getText();
+        return element.getAttribute("value");
     }
 
     public void setRadioButton(WebElement radioButtonElement, String text){
         wait.until(visibilityOf(radioButtonElement));
-        text = text.toLowerCase();
-        //WebElement element = radioButtonElement.findElement(By.cssSelector("[value = " + text + "]"));
+        boolean isOptionAvailable = false;
+
         List<WebElement> elements = radioButtonElement.findElements(By.cssSelector("input[class='ant-radio-input']"));
         for(WebElement elem : elements){
             if(elem.getAttribute("value").equals(text)){
                 elem.click();
+                isOptionAvailable = true;
             }
         }
-        throw new NoSuchElementException("No such radiobutton option available");
+        if(!isOptionAvailable) {
+            throw new NoSuchElementException("No such radiobutton option available");
+        }
     }
 
     public void setDropdown(WebElement dpdElement, String text){
         wait.until(visibilityOf(dpdElement));
-        text = text.toLowerCase();
+        boolean isAvailable = false;
         List<WebElement> elements = dpdElement.findElements(By.cssSelector("li[role='option']"));
         for(WebElement elem : elements){
             if(elem.getText().equals(text)){
+                wait.until(elementToBeClickable(elem));
                 elem.click();
+                isAvailable = true;
             }
         }
-        throw new NoSuchElementException("No such dropdown option available");
+        if(!isAvailable) {
+            throw new NoSuchElementException("No such dropdown option available");
+        }
     }
+
+    public void setCalendarDate(WebElement dtpElement, String date){
+        wait.until(visibilityOf(dtpElement));
+        dtpElement.clear();
+        dtpElement.sendKeys(date);
+    }
+
 
 }
