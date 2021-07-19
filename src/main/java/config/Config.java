@@ -50,4 +50,8 @@ public class Config {
         return properties.getProperty("mailTrap.mailRecipient");
     }
 
+    public String getMailTrapProjectId() {
+        return properties.getProperty("mailTrap.mailProjectId");
+    }
+
 }

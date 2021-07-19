@@ -102,10 +102,10 @@ public class MainPageTest extends SeleniumBaseTest {
         String surnameInput = "e2eSurname" + e2eSuffix;
         String newsletterOption = "Medical";
         String startingDate = "2021-09-20";
-        String endDate = "2021-10-20";
+        String endDate = "2021-11-20";
         String rdoChoice = "male";
-        String mailProjectId = "1406469";
-        String bearer = config.getMailTrapBearerToken();
+        String mailProjectId = config.getMailTrapProjectId();
+        String bearerToken = config.getMailTrapBearerToken();
         String emailId = UUID.randomUUID().toString().substring(0, 3);
         String emailSubjectToVerify = "This is the e2eTest Subject for email with ID" + emailId;
         Response response;
@@ -127,7 +127,7 @@ public class MainPageTest extends SeleniumBaseTest {
         response = given()
                 .headers(
                         "Authorization",
-                        "Bearer " + bearer,
+                        "Bearer " + bearerToken,
                         "Content-Type",
                         ContentType.JSON,
                         "Accept",
