@@ -1,8 +1,10 @@
 package helpers;
+
 import base.SeleniumBasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
@@ -10,30 +12,29 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class GlobalMethods extends SeleniumBasePage {
 
-    public GlobalMethods(WebDriver driver){
+    public GlobalMethods(WebDriver driver) {
         super(driver);
     }
 
-    public void setInput(WebElement inputElement, String text){
+    public void setInput(WebElement inputElement, String text) {
         wait.until(visibilityOf(inputElement));
         inputElement.clear();
         inputElement.sendKeys(text);
     }
 
-    public String getTextFromInputElement(WebElement element){
+    public String getTextFromInputElement(WebElement element) {
         wait.until(visibilityOf(element));
         return element.getAttribute("value");
     }
 
-    public void setRadioButton(WebElement radioButtonElement, String text){
+    public void setRadioButton(WebElement radioButtonElement, String text) {
         wait.until(visibilityOf(radioButtonElement));
 
-        WebElement element = radioButtonElement.findElement(By.cssSelector("input[class='ant-radio-input'][value="+ text +"]"));
+        WebElement element = radioButtonElement.findElement(By.cssSelector("input[class='ant-radio-input'][value=" + text + "]"));
         element.click();
-//
     }
 
-    public void setDropdown(WebElement dpdElement, String text){
+    public void setDropdown(WebElement dpdElement, String text) {
         boolean isAvailable = false;
         WebElement elemDD = driver.findElement(By.id("newsletter_newsType"));
 
@@ -42,45 +43,46 @@ public class GlobalMethods extends SeleniumBasePage {
         builder.sendKeys(elemDD, Keys.DOWN).build().perform();
 
         List<WebElement> elements = dpdElement.findElements(By.cssSelector("li[role='option']"));
-        for(WebElement elem : elements){
-            if(elem.getText().equals(text)){
+        for (WebElement elem : elements) {
+            if (elem.getText().equals(text)) {
                 wait.until(elementToBeClickable(elem));
                 elem.click();
                 isAvailable = true;
             }
         }
-        if(!isAvailable) {
+        if (!isAvailable) {
             throw new NoSuchElementException("No such dropdown option available");
         }
     }
 
-    public void setCalendarDate(WebElement dtpElement, String date){
-        wait.until(visibilityOf(dtpElement));
+    public void setCalendarDate(WebElement dtpElement, String date) {
+        wait.until(elementToBeClickable(dtpElement));
         dtpElement.click();
         WebElement elem = driver.findElement(By.cssSelector("input.ant-calendar-input"));
-        wait.until(visibilityOf(elem));
+        wait.until(elementToBeClickable(dtpElement));
         elem.clear();
         elem.sendKeys(date);
         Actions builder = new Actions(driver);
+        wait.until(elementToBeClickable(dtpElement));
         builder.sendKeys(dtpElement, date).sendKeys(Keys.ENTER).build().perform();
     }
 
-    public void setCheckboxElement(WebElement chkElement){
-        if(!chkElement.isSelected()){
+    public void setCheckboxElement(WebElement chkElement) {
+        if (!chkElement.isSelected()) {
             chkElement.click();
         }
     }
 
-    public boolean getChechboxElementState(WebElement chkElement){
+    public boolean getCheckboxElementState(WebElement chkElement) {
         return chkElement.isSelected();
     }
 
-    public String getDateFromCalendar(WebElement dtpElement){
+    public String getDateFromCalendar(WebElement dtpElement) {
         WebElement elem = dtpElement.findElement(By.cssSelector(".ant-calendar-picker-input"));
         return elem.getAttribute("value");
     }
 
-    public String getTextFromDropdown(WebElement dpdElement){
+    public String getTextFromDropdown(WebElement dpdElement) {
         WebElement element = dpdElement.findElement(By.cssSelector("li[role='option'][aria-selected='true']"));
         return element.getText();
     }
@@ -89,4 +91,14 @@ public class GlobalMethods extends SeleniumBasePage {
         WebElement element = elem.findElement(By.cssSelector("span[class*='ant-radio-checked']>input"));
         return element.getAttribute("value");
     }
+
+    public void clickOnButton(WebElement elem) {
+        wait.until(visibilityOf(elem));
+        elem.click();
+    }
+
+    public void scrollToElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
 }
