@@ -12,5 +12,5 @@ Setup(with Maven tool):
 ![image](https://user-images.githubusercontent.com/26879282/126209455-849e59af-3cd2-4fe6-b7d1-4da0933a5204.png)
 5.)Copy your credentials to the resources/config.properties file
 ![image](https://user-images.githubusercontent.com/26879282/126210076-010b7f42-8ff8-4c41-8de9-ad0996a07756.png)
-
-Tests are now ready to go!
+6.)Tests are available in test/java/Test/MainPageTest 
+![image](https://user-images.githubusercontent.com/26879282/126216335-99041965-b124-404e-89b0-b63beaa2696b.png)
