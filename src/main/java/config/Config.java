@@ -1,10 +1,11 @@
 package config;
+
 import java.io.InputStream;
 import java.util.Properties;
 
 public class Config {
 
-    private Properties properties;
+    private final Properties properties;
 
     private Properties getProperties() {
         Properties prop = new Properties();
@@ -17,25 +18,36 @@ public class Config {
         return prop;
     }
 
-    public Config (){
+    public Config() {
         properties = getProperties();
     }
 
-    public String getApplicationUrl () {
+    public String getApplicationUrl() {
         return properties.getProperty("application.url");
     }
 
-    public String getChromedriverPath () { return properties.getProperty("chromedriver.propertyPath");}
+    public String getChromedriverPath() {
+        return properties.getProperty("chromedriver.propertyPath");
+    }
 
-    public String getGeckodriverPath () { return properties.getProperty("geckodriver.propertyPath");}
+    public String getChromedriverPropertyName() {
+        return properties.getProperty("chromedriver.propertyName");
+    }
 
-    public String getEdgedriverPath () { return properties.getProperty("edgedriver.propertyPath");}
+    public String getMailTrapBearerToken() {
+        return properties.getProperty("mailTrap.bearerToken");
+    }
 
-    public String getChromedriverPropertyName () { return properties.getProperty("chromedriver.propertyName");}
+    public String getMailTrapUsername() {
+        return properties.getProperty("mailTrap.username");
+    }
 
-    public String getGeckodriverPropertyName () { return properties.getProperty("geckodriver.propertyName");}
+    public String getMailTrapPassword() {
+        return properties.getProperty("mailTrap.password");
+    }
 
-    public String getEdgedriverPropertyName () { return properties.getProperty("edgedriver.propertyName");}
-
+    public String getMailTrapRecipient() {
+        return properties.getProperty("mailTrap.mailRecipient");
+    }
 
 }
